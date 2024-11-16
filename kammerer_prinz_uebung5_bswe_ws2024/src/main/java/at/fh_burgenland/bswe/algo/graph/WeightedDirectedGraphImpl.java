@@ -10,9 +10,6 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
     Set<String> vertexSet = new HashSet<>();
     List<Edge> edgeList = new ArrayList<>();
 
-    public record Edge(String from, String to, int weight) {
-    }
-
     @Override
     public void addVertex(String label) {
         vertexSet.add(label);
@@ -36,13 +33,13 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
     @Override
     public boolean hasEdge(String from, String to) {
         return edgeList.stream()
-                .anyMatch(edge -> edge.from.equals(from) && edge.to.equals(to));
+                .anyMatch(edge -> edge.from().equals(from) && edge.to().equals(to));
     }
 
     @Override
     public void removeEdge(String from, String to) {
         if (hasEdge(from, to)) {
-            edgeList.removeIf(edge -> edge.from.equals(from) && edge.to.equals(to));
+            edgeList.removeIf(edge -> edge.from().equals(from) && edge.to().equals(to));
         } else {
             System.out.println("Edge does not exist!");
         }
@@ -51,8 +48,8 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
     @Override
     public List<String> getNeighbors(String vertex) {
         return edgeList.stream()
-                .filter(edge -> edge.from.equals(vertex))
-                .map(edge -> edge.to)
+                .filter(edge -> edge.from().equals(vertex))
+                .map(edge -> edge.to())
                 .toList();
     }
 
@@ -84,8 +81,8 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
     public int getWeight(String from, String to) {
         if (hasEdge(from, to)) {
             return edgeList.stream()
-                    .filter(edge -> edge.from.equals(from) && edge.to.equals(to))
-                    .findFirst().get().weight;
+                    .filter(edge -> edge.from().equals(from) && edge.to().equals(to))
+                    .findFirst().get().weight();
         } else {
             throw new RuntimeException("Edge does not exist");
         }

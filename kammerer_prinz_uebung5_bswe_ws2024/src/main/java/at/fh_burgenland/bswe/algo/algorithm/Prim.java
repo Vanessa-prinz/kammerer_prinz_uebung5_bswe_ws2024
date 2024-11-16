@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Prim {
 
-
     /**
      * Calculates the minimum spanning tree of a graph using Prim's algorithm.
      *

@@ -11,9 +11,6 @@ public class WeightedUndirectedGraphImpl implements WeightedUndirectedGraph {
     List<Edge> edgeList = new ArrayList<>();
 
 
-    public record Edge(String from, String to, int weight) {
-    }
-
     @Override
     public void addVertex(String label) {
         vertexSet.add(label);
@@ -54,12 +51,12 @@ public class WeightedUndirectedGraphImpl implements WeightedUndirectedGraph {
         List<String> neighbors = new ArrayList<>();
 
         neighbors.addAll(edgeList.stream()
-                .filter(edge -> edge.from.equals(vertex))
-                .map(edge -> edge.to)
+                .filter(edge -> edge.from().equals(vertex))
+                .map(edge -> edge.to())
                 .toList());
         neighbors.addAll(edgeList.stream()
-                .filter(edge -> edge.to.equals(vertex))
-                .map(edge -> edge.from)
+                .filter(edge -> edge.to().equals(vertex))
+                .map(edge -> edge.from())
                 .toList());
 
         return neighbors;
@@ -94,14 +91,14 @@ public class WeightedUndirectedGraphImpl implements WeightedUndirectedGraph {
         if (hasEdge(from, to)) {
             return edgeList.stream()
                     .filter(edge -> isMatchingEdge(from, to, edge))
-                    .findFirst().get().weight;
+                    .findFirst().get().weight();
         } else {
             throw new RuntimeException("Edge does not exist");
         }
     }
 
     private static boolean isMatchingEdge(String from, String to, Edge edge) {
-        return (edge.from.equals(from) && edge.to.equals(to))
-                || (edge.from.equals(to) && edge.to.equals(from));
+        return (edge.from().equals(from) && edge.to().equals(to))
+                || (edge.from().equals(to) && edge.to().equals(from));
     }
 }
