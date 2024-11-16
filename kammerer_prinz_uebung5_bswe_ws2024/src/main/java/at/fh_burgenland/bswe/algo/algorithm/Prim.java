@@ -8,9 +8,11 @@ public class Prim {
 
     /**
      * Calculates the minimum spanning tree of a graph using Prim's algorithm.
+     * format: ["A-B", "B-C", ...]
      *
      * @param graph The weighted undirected graph to calculate the MST on. Must be connected.
      * @return A list of edges representing the minimum spanning tree (MST)
+     *
      */
     public static List<String> prim(WeightedUndirectedGraph graph) {
         // TODO: Implement Prim's algorithm

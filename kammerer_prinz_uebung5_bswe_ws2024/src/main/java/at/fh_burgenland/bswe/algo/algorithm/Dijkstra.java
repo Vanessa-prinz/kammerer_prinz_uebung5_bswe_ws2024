@@ -21,13 +21,15 @@ public class Dijkstra {
 
     /**
      * Returns the shortest path from the start vertex to the end vertex.
+     * format: ["A", "B", "C", ...]
      *
+     * @param graph     The graph to calculate the shortest path on
      * @param distances A map containing the shortest distances from the start vertex to all other vertices
      * @param start     The start vertex
      * @param end       The end vertex
      * @return A list containing the vertices of the shortest path from the start vertex to the end vertex
      */
-    public static List<String> getShortestPath(Map<String, Integer> distances, String start, String end) {
+    public static List<String> getShortestPath(WeightedDirectedGraph graph, Map<String, Integer> distances, String start, String end) {
         // TODO: Implement getting the shortest path
         return null;
     }
