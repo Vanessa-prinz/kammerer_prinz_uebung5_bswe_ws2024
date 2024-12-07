@@ -1,5 +1,7 @@
 package at.fh_burgenland.bswe.algo.graph;
 
+import java.util.List;
+
 public interface WeightedGraph extends Graph {
 
     @Override
@@ -10,5 +12,4 @@ public interface WeightedGraph extends Graph {
     void addEdge(String from, String to, int weight);
 
     int getWeight(String from, String to);
-
 }

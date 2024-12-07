@@ -1,5 +1,7 @@
 package at.fh_burgenland.bswe.algo.graph;
 
-public interface WeightedDirectedGraph extends WeightedGraph {
+import java.util.List;
 
+public interface WeightedDirectedGraph extends WeightedGraph {
+    List<String> getIncomingNeighbors(String vertex);
 }

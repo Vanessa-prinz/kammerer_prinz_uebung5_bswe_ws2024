@@ -20,7 +20,6 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
         return vertexSet.contains(vertex);
     }
 
-    //TODO: Kanten entfernen
     @Override
     public void removeVertex(String vertex) {
         if (hasVertex(vertex)) {
@@ -50,6 +49,14 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
         return edgeList.stream()
                 .filter(edge -> edge.from().equals(vertex))
                 .map(edge -> edge.to())
+                .toList();
+    }
+
+    @Override
+    public List<String> getIncomingNeighbors(String vertex) {
+        return edgeList.stream()
+                .filter(edge -> edge.to().equals(vertex))
+                .map(edge -> edge.from())
                 .toList();
     }
 
