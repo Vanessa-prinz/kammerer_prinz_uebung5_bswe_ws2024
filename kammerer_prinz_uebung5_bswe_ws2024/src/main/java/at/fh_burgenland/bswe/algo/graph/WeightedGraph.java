@@ -1,12 +1,13 @@
 package at.fh_burgenland.bswe.algo.graph;
 
-import java.util.List;
-
+/**
+ * This interface extends Graph to support weighted edges.
+ */
 public interface WeightedGraph extends Graph {
 
     @Override
     default void addEdge(String from, String to) {
-        throw new UnsupportedOperationException("Not supported in WeightedGraph");
+        throw new UnsupportedOperationException("Not supported in WeightedGraph!");
     }
 
     void addEdge(String from, String to, int weight);

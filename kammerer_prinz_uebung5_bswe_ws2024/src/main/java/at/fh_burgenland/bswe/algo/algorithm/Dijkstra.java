@@ -4,6 +4,9 @@ import at.fh_burgenland.bswe.algo.graph.WeightedDirectedGraph;
 
 import java.util.*;
 
+/**
+ * This class provides methods to calculate the shortest path in a weighted directed graph using the Dijkstra algorithm.
+ */
 public class Dijkstra {
     /*
     nachfolger je ausgewählten, liste erledigte
@@ -80,7 +83,7 @@ public class Dijkstra {
      * @param end       The end vertex
      * @return A list containing the vertices of the shortest path from the start vertex to the end vertex
      */
-    public static List<String> getShortestPath(WeightedDirectedGraph graph, Map<String, Integer> distances, String start, String end) {
+    public static List<String> getShortestPath(WeightedDirectedGraph graph, Map<String, Integer> distances, String start, String end) { //TODO: ohne distances Variable lt. Sebastian???
         List<String> shortestPath = new ArrayList<>();
         if (graph == null
                 || !graph.hasVertex(start)

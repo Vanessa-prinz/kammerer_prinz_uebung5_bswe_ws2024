@@ -3,6 +3,9 @@ package at.fh_burgenland.bswe.algo.graph;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This interface defines the basic operations for a graph.
+ */
 public interface Graph {
 
     void addVertex(String label);
@@ -24,5 +27,4 @@ public interface Graph {
     int getNumberOfVertices();
 
     int getNumberOfEdges();
-
 }
