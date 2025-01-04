@@ -3,13 +3,25 @@ package at.fh_burgenland.bswe.algo.algorithm;
 import at.fh_burgenland.bswe.algo.graph.WeightedDirectedGraph;
 import at.fh_burgenland.bswe.algo.graph.WeightedDirectedGraphImpl;
 
+/**
+ * This helper class creates different types of test graphs for the test class of the dijkstra algorithm.
+ */
 public class DirectedGraphTestCases {
+
+    /**
+     * This method creates a weighted directed graph with a single vertex.
+     * @return the graph with one vertex
+     */
     public static WeightedDirectedGraph createWeightedDirectedGraph_singleVertex() {
         WeightedDirectedGraph graph = new WeightedDirectedGraphImpl();
         graph.addVertex("A");
         return graph;
     }
 
+    /**
+     * This method creates a weighted directed graph with two vertex.
+     * @return the graph with two vertex
+     */
     public static WeightedDirectedGraph createWeightedDirectedGraph_doubleVertex() {
         WeightedDirectedGraph graph = new WeightedDirectedGraphImpl();
         graph.addVertex("A");
@@ -18,6 +30,10 @@ public class DirectedGraphTestCases {
         return graph;
     }
 
+    /**
+     * This method creates a weighted directed graph where all vertices are connected.
+     * @return the graph with vertices and edges as described
+     */
     public static WeightedDirectedGraph createWeightedDirectedGraph_connectedVertices() {
         WeightedDirectedGraph graph = new WeightedDirectedGraphImpl();
         graph.addVertex("A");
@@ -35,6 +51,10 @@ public class DirectedGraphTestCases {
         return graph;
     }
 
+    /**
+     * This method creates a weighted directed graph where both directions are symmetrical.
+     * @return the symmetrical graph with vertices and edges as described
+     */
     public static WeightedDirectedGraph createWeightedDirectedGraph_symmetrical() {
         WeightedDirectedGraph graph = new WeightedDirectedGraphImpl();
         graph.addVertex("A");
@@ -51,6 +71,10 @@ public class DirectedGraphTestCases {
         return graph;
     }
 
+    /**
+     * This method creates a weighted directed graph where one vertex stands alone, making this graph disconnected.
+     * @return the non-connected graph
+     */
     public static WeightedDirectedGraph createWeightedDirectedGraph_nonConnectedVertices() {
         WeightedDirectedGraph graph = new WeightedDirectedGraphImpl();
         graph.addVertex("A");
@@ -61,6 +85,10 @@ public class DirectedGraphTestCases {
         return graph;
     }
 
+    /**
+     * This method creates a weakly connected weighted directed graph.
+     * @return the weakly connected graph
+     */
     public static WeightedDirectedGraph createWeightedDirectedGraph_weaklyConnectedVertices() {
         WeightedDirectedGraph graph = new WeightedDirectedGraphImpl();
         graph.addVertex("A");

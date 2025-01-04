@@ -20,7 +20,7 @@ public class Prim {
      */
     public static List<String> prim(WeightedUndirectedGraph graph) {
         if (graph == null || graph.getVertices().isEmpty()) {
-            throw new IllegalArgumentException("Graph is null or empty!");
+            return Collections.emptyList();
         }
 
         Set<String> visitedVertices = new HashSet<>();

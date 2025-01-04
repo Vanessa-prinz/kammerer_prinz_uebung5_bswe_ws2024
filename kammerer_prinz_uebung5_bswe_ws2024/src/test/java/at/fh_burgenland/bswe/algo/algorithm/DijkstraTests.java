@@ -10,7 +10,10 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DijkstraTest {
+/**
+ * This test class contains test methods for the Dijkstra algorithm for different weighted directed graphs.
+ */
+class DijkstraTests {
 
     @Test
     void dijkstra() {
