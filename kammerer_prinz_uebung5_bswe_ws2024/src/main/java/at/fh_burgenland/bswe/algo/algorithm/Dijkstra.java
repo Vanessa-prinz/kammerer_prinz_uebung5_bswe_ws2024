@@ -8,27 +8,7 @@ import java.util.*;
  * This class provides methods to calculate the shortest path in a weighted directed graph using the Dijkstra algorithm.
  */
 public class Dijkstra {
-    /*
-    nachfolger je ausgewählten, liste erledigte
-
-    alle entfernungen von best. ausgangspunkt auf unendlich setzen
-    kosten zu startknoten 0
-
-    warteschlange zunächst nur mit startknoten
-    nachfolgerliste mit anliegenden befüllen
-
-    ersten aus warteschlange wählen -> gewichtung zu nachfolgern eintragen, wenn kürzer als bisherige
-    vorgänger immer dazu eintragen
-    nachfolger in warteschlange aufnehmen & erledigten eintragen
-
-    den aus der warteschlange wählen, wo kosten bisher am geringsten
-    wieder gewichtung zu nachfolgern und ggf ersetzen (mit vorgänger)
-    usw.
-
-    bis alle
-     */
-
-    /**
+     /**
      * Calculates the shortest path from the start vertex to all other vertices in the graph.
      *
      * @param graph The graph to calculate the shortest path on
@@ -47,7 +27,7 @@ public class Dijkstra {
         for (String vertex : graph.getVertices()) {
             distancesToStart.put(vertex, Integer.MAX_VALUE);
         }
-        distancesToStart.put(start, 0); //TODO-Startknoten damit eh nicht doppelt??
+        distancesToStart.put(start, 0);
 
         locationsToBeVisitedNext.add(start);
 
@@ -78,43 +58,67 @@ public class Dijkstra {
      * format: ["A", "B", "C", ...]
      *
      * @param graph     The graph to calculate the shortest path on
-     * @param distances A map containing the shortest distances from the start vertex to all other vertices
      * @param start     The start vertex
      * @param end       The end vertex
      * @return A list containing the vertices of the shortest path from the start vertex to the end vertex
      */
-    public static List<String> getShortestPath(WeightedDirectedGraph graph, Map<String, Integer> distances, String start, String end) { //TODO: ohne distances Variable lt. Sebastian???
-        List<String> shortestPath = new ArrayList<>();
-        if (graph == null
-                || !graph.hasVertex(start)
-                || !graph.hasVertex(end)
-                || !distances.containsKey(start)
-                || !distances.containsKey(end)
-                || distances.get(end) == Integer.MAX_VALUE)
-            return shortestPath;
+    public static List<String> getShortestPath(WeightedDirectedGraph graph, String start, String end) {
+//        alles von vorn, weil ich meine Predecessors nicht habe
+        Map<String, Integer> distancesToStart = new HashMap<>();
+        Map<String, String> predecessors = new HashMap<>();
+        Set<String> visitedLocations = new HashSet<>();
+        Queue<String> locationsToBeVisitedNext = new PriorityQueue<>(Comparator.comparingInt(distancesToStart::get));
 
-        String currentLocation = end;
-        while (currentLocation !=null && !currentLocation.equals(start)) {
-            shortestPath.add(0, currentLocation);
+        if (graph == null || !graph.hasVertex(start) || !graph.hasVertex(end)) {
+            return new ArrayList<>();
+        }
 
-            boolean foundProdecessor = false;
-            for (String neighbor : graph.getIncomingNeighbors(currentLocation)) {
-                //TODO-Voraussetzung wir dürfen neue Methoden zu WeightedDirectedGraph hinzufügen
-                int edgeWeight = graph.getWeight(neighbor, currentLocation);
-                if (distances.get(currentLocation) - edgeWeight == distances.get(neighbor)) {
-                    currentLocation = neighbor;
-                    foundProdecessor = true;
-                    break;
+        for (String vertex : graph.getVertices()) {
+            distancesToStart.put(vertex, Integer.MAX_VALUE);
+        }
+        distancesToStart.put(start, 0);
+
+        locationsToBeVisitedNext.add(start);
+
+        while (!locationsToBeVisitedNext.isEmpty()) {
+            String currentLocation = locationsToBeVisitedNext.poll();
+            if (visitedLocations.contains(currentLocation)) {
+                continue;
+            }
+            visitedLocations.add(currentLocation);
+
+            for (String neighbor : graph.getNeighbors(currentLocation)) {
+                if (visitedLocations.contains(neighbor)) {
+                    continue;
+                }
+                int edgeWeight = graph.getWeight(currentLocation, neighbor);
+                int newDistanceToNeighbor = distancesToStart.get(currentLocation) + edgeWeight;
+                if (newDistanceToNeighbor < distancesToStart.get(neighbor)) {
+                    distancesToStart.put(neighbor, newDistanceToNeighbor);
+                    predecessors.put(neighbor, currentLocation);
+                    locationsToBeVisitedNext.add(neighbor);
                 }
             }
-            if (!foundProdecessor)
-                return new ArrayList<>();
+        }
+
+//        getShortestPath-Part
+        List<String> shortestPath = new ArrayList<>();
+        String currentLocation = end;
+
+        while (currentLocation != null && !currentLocation.equals(start)) {
+            shortestPath.add(0, currentLocation);
+            currentLocation = predecessors.get(currentLocation);
+        }
+
+        if (currentLocation == null) {
+            return new ArrayList<>(); // Kein gültiger Pfad gefunden
         }
 
         shortestPath.add(0, start);
         return shortestPath;
     }
 
+//    getShortestPath wenn wir die Predecessors mitübergeben könnten
 //    /**
 //     * Returns the shortest path from the start vertex to the end vertex.
 //     * format: ["A", "B", "C", ...]

@@ -26,7 +26,7 @@ class DijkstraTests {
     void getShortestPath() {
         //Copy of ConnectedVertices
         WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_connectedVertices();
-        assertEquals(List.of("A", "C", "D"), Dijkstra.getShortestPath(graph, Map.of("A", 0, "B", 3, "C", 4, "D", 5), "A", "D"));
+        assertEquals(List.of("A", "C", "D"), Dijkstra.getShortestPath(graph, "A", "D"));
     }
 
     @Test
@@ -38,7 +38,7 @@ class DijkstraTests {
     @Test
     public void testGetShortestPath_singleVertex() {
         WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_singleVertex();
-        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(graph, new HashMap<>(), "A", "A"));
+        assertEquals(List.of("A"), Dijkstra.getShortestPath(graph, "A", "A"));
     }
 
     @Test
@@ -50,7 +50,7 @@ class DijkstraTests {
     @Test
     public void testGetShortestPath_doubleVertex() {
         WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_doubleVertex();
-        assertEquals(List.of("A", "B"), Dijkstra.getShortestPath(graph, Map.of("A", 0, "B", 5), "A", "B"));
+        assertEquals(List.of("A", "B"), Dijkstra.getShortestPath(graph, "A", "B"));
     }
 
     @Test
@@ -62,7 +62,7 @@ class DijkstraTests {
     @Test
     public void testGetShortestPath_connectedVertices() {
         WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_connectedVertices();
-        assertEquals(List.of("A", "C", "D"), Dijkstra.getShortestPath(graph, Map.of("A", 0, "B", 3, "C", 4, "D", 5), "A", "D"));
+        assertEquals(List.of("A", "C", "D"), Dijkstra.getShortestPath(graph, "A", "D"));
     }
 
     @Test
@@ -74,7 +74,7 @@ class DijkstraTests {
     @Test
     public void testGetShortestPath_weaklyConnected() {
         WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_weaklyConnectedVertices();
-        assertEquals(List.of("A", "B", "C"), Dijkstra.getShortestPath(graph, Map.of("A", 0, "B", 3, "C", 5), "A", "C"));
+        assertEquals(List.of("A", "B", "C"), Dijkstra.getShortestPath(graph, "A", "C"));
     }
 
     @Test
@@ -86,7 +86,7 @@ class DijkstraTests {
     @Test
     public void testGetShortestPath_nonConnected() {
         WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_nonConnectedVertices();
-        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(graph, null, "A", "D"));
+        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(graph, "A", "D"));
     }
 
     @Test
@@ -98,7 +98,7 @@ class DijkstraTests {
     @Test
     public void testGetShortestPath_symmetricalGraph() {
         WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_symmetrical();
-        assertEquals(List.of("A", "C"), Dijkstra.getShortestPath(graph, Map.of("A", 0, "B", 3, "C", 4), "A", "C"));
+        assertEquals(List.of("A", "C"), Dijkstra.getShortestPath(graph, "A", "C"));
     }
 
     @Test
@@ -108,7 +108,7 @@ class DijkstraTests {
 
     @Test
     public void testGetShortestPath_nullGraph() {
-        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(null, new HashMap<>(), "A", "D"));
+        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(null, "A", "D"));
     }
 
     @Test
@@ -120,31 +120,13 @@ class DijkstraTests {
     @Test
     public void testGetShortestPath_startNotIncludedInGraph() {
         WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_connectedVertices();
-        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(graph, Map.of("A", 0, "B", 3, "C", 4, "D", 5), "F", "C"));
+        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(graph, "F", "C"));
     }
 
     @Test
     public void testGetShortestPath_endNotIncludedInGraph() {
         WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_connectedVertices();
-        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(graph, Map.of("A", 0, "B", 3, "C", 4, "D", 5), "A", "F"));
-    }
-
-    @Test
-    public void testGetShortestPath_startNotIncludedInDistances() {
-        WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_connectedVertices();
-        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(graph, Map.of("B", 3, "C", 4, "D", 5), "A", "D"));
-    }
-
-    @Test
-    public void testGetShortestPath_endNotIncludedInDistances() {
-        WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_connectedVertices();
-        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(graph, Map.of("A", 0, "B", 3, "C", 4), "A", "D"));
-    }
-
-    @Test
-    public void testGetShortestPath_distancesNotMatching_Failure() {
-        WeightedDirectedGraph graph = DirectedGraphTestCases.createWeightedDirectedGraph_connectedVertices();
-        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(graph, Map.of("A", 12, "B", 4, "C", 5, "D", 0), "A", "D"));
+        assertEquals(new ArrayList<>(), Dijkstra.getShortestPath(graph, "A", "F"));
     }
 
 //    @Test

@@ -28,25 +28,24 @@ public class Prim {
         List<String> mstEdges = new ArrayList<>();
 
         String start = graph.getVertices().iterator().next();
-        visitedVertices.add(start); //als besucht markiert
+        visitedVertices.add(start);
 
         for (String neighbor : graph.getNeighbors(start)) {
             edgeQueue.add(new Edge(start, neighbor, graph.getWeight(start, neighbor)));
         }
 
         while (!edgeQueue.isEmpty() && visitedVertices.size() < graph.getVertices().size()) {
-            Edge smallestEdge = edgeQueue.poll(); //aus queue entfernen und in smallestEdge speichern
+            Edge smallestEdge = edgeQueue.poll();
 
             String from = smallestEdge.from();
             String to = smallestEdge.to();
 
-            if (visitedVertices.contains(from) && visitedVertices.contains(to)) { //Kanten deren Knoten from und to schon besucht wurden überspringen
+            if (visitedVertices.contains(from) && visitedVertices.contains(to)) {
                 continue;
             }
 
             mstEdges.add(from + "-" + to);
 
-            //String newVertex = visitedVertices.contains(from) ? to : from;
             String newVertex;
             if (visitedVertices.contains(from)) {
                 newVertex = to;
@@ -62,7 +61,7 @@ public class Prim {
             }
         }
 
-        if (visitedVertices.size() < graph.getVertices().size()) { //prüft, ob alle Knoten besucht
+        if (visitedVertices.size() < graph.getVertices().size()) {
             throw new IllegalStateException("Graph is not connected, MST cannot be formed.");
         }
 
