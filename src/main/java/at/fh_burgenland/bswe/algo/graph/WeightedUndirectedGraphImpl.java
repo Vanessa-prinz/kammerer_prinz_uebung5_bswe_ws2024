@@ -37,7 +37,7 @@ public class WeightedUndirectedGraphImpl implements WeightedUndirectedGraph {
      * @param vertex the vertex to remove
      */
     @Override
-    public void removeVertex(String vertex) { //TODO: Kanten entfernen
+    public void removeVertex(String vertex) {
         if (hasVertex(vertex)) {
             vertexSet.remove(vertex);
         } else {

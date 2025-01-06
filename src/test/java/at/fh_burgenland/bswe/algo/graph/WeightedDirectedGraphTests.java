@@ -125,6 +125,4 @@ class WeightedDirectedGraphTests {
     void getNumberOfEdges() {
         Assertions.assertEquals(2, graph.getNumberOfEdges());
     }
-
-    //TODO: test für getIncomingNeighbors
 }

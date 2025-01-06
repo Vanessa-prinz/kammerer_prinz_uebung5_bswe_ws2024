@@ -6,5 +6,4 @@ import java.util.List;
  * This interface extends WeightedGraph to represent directed graphs.
  */
 public interface WeightedDirectedGraph extends WeightedGraph {
-    List<String> getIncomingNeighbors(String vertex);
 }

@@ -15,15 +15,17 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
 
     /**
      * This method adds a vertex to the graph.
+     *
      * @param label the label of the vertex
      */
     @Override
-    public void addVertex(String label) { //TODO: vorher checken ob schon existiert notwendig???
+    public void addVertex(String label) {
         vertexSet.add(label);
     }
 
     /**
      * This method checks if the graph contains the specific vertex.
+     *
      * @param vertex the vertex to check for
      * @return true if the vertex exists, false if otherwise
      */
@@ -34,6 +36,7 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
 
     /**
      * This method removes a vertex from the graph.
+     *
      * @param vertex the vertex to remove
      */
     @Override
@@ -47,8 +50,9 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
 
     /**
      * This method adds an edge with a specific weight between two vertices.
-     * @param from the source vertex
-     * @param to the destination vertex
+     *
+     * @param from   the source vertex
+     * @param to     the destination vertex
      * @param weight the weight of the edge
      */
     @Override
@@ -62,8 +66,9 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
 
     /**
      * This method gets the weight of an edge between to vertices.
+     *
      * @param from the source vertex
-     * @param to the destination vertex
+     * @param to   the destination vertex
      * @return the weight of the edge
      */
     @Override
@@ -79,8 +84,9 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
 
     /**
      * This method checks if an edge exists between two vertices.
+     *
      * @param from the source vertex
-     * @param to the destination vertex
+     * @param to   the destination vertex
      * @return true if the edge exists, false if otherwise
      */
     @Override
@@ -91,8 +97,9 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
 
     /**
      * This method removes an edge between two vertices.
+     *
      * @param from the source vertex
-     * @param to the destination vertex
+     * @param to   the destination vertex
      */
     @Override
     public void removeEdge(String from, String to) {
@@ -105,6 +112,7 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
 
     /**
      * This method gets the neighbors of a specific vertex.
+     *
      * @param vertex the vertex to get the neighbors for
      * @return a list of neighbors from the given vertex
      */
@@ -118,6 +126,7 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
 
     /**
      * This method gets all vertices of the graph.
+     *
      * @return a set of all vertices
      */
     @Override
@@ -127,6 +136,7 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
 
     /**
      * This method gets the number of vertices in the graph.
+     *
      * @return the number of vertices
      */
     @Override
@@ -136,23 +146,11 @@ public class WeightedDirectedGraphImpl implements WeightedDirectedGraph {
 
     /**
      * This method gets the number of edges in the graph.
+     *
      * @return the number of edges
      */
     @Override
     public int getNumberOfEdges() {
         return edgeList.size();
-    }
-
-    /**
-     * This method gets all incoming neighbors of a vertex.
-     * @param vertex the vertex to get the incoming neighbors for
-     * @return a list of incoming neighbors from the given vertex
-     */
-    @Override
-    public List<String> getIncomingNeighbors(String vertex) { //TODO: Unterschied zu getNeighbor???
-        return edgeList.stream()
-                .filter(edge -> edge.to().equals(vertex))
-                .map(edge -> edge.from())
-                .toList();
     }
 }
